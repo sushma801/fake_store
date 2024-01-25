@@ -1,10 +1,11 @@
 import { lazy } from "react";
+import "./App.css";
+import ProductView from "./components/ProductView";
 
 import "./App.css";
 import Headers from "./components/Headers";
 import { Route, Routes } from "react-router-dom";
-const Home = lazy(() => import("./components/Home"));
-const ProductDetailPage = lazy(() => import("./components/ProductView"));
+import Home from "./components/Home";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <Headers />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/show/:id" element={<ProductDetailPage />} />
+        <Route path="/show/:productId" element={<ProductView />} />
       </Routes>
     </>
   );

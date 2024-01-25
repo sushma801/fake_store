@@ -13,3 +13,8 @@ export interface IRatings {
   rate?: number;
   count?: number;
 }
+
+export interface IDropDown {
+  label: string;
+  value: string;
+}
