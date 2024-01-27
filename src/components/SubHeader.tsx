@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 import { BiSolidCartAdd } from "react-icons/bi";
 import { CustomeTextFeild, StyledSubHeader } from "./SubHeader.module";
 
 import { useNavigate } from "react-router-dom";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { categories } from "../Modals/Constant";
 
 interface ISubProps {
@@ -18,11 +24,13 @@ const SubHeader = ({ onSearch, onSelectCategory }: ISubProps) => {
 
   const navigate = useNavigate();
 
-  const handleEnteredValue = (event: Event) => {
+  const handleEnteredValue = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setSearchValue(event.target?.value);
     onSearch(event.target?.value);
   };
-  const handleSelecte = (event: Event) => {
+  const handleSelecte = (event: SelectChangeEvent<string>) => {
     setSelectedValue(event.target?.value);
     onSelectCategory(event.target?.value);
   };

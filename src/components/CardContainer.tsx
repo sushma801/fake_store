@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { IProductInfo } from "../Modals/Product";
 import { StyledCardContainer } from "./CardContainer.module";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,7 @@ const CardContainer = ({
 }: IProductInfo) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState<boolean>(false);
+
   const handleView = () => {
     if (isEditProduct) {
       navigate(`/add_product`, {
@@ -63,14 +64,14 @@ const CardContainer = ({
           <h3 className="title">{title}</h3>
           <span></span>
         </div>
-        <img src={image} alt={image} className={`image`} />
+        <img src={image} alt={image} />
         <div className="footer">
           <p className="description">
             <span>Description:</span>
             {description}
           </p>
           <div className="ratings">
-            <span>Price: {price}</span>
+            <span>Price: Rs.{Math.floor(price * 83.33)}</span>
             <span>Rate:{rating?.rate}</span>
           </div>
           <div className="actions">

@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect, useState } from "react";
 import { getAllProducts } from "../service/API";
 import { IProductInfo } from "../Modals/Product";
 import CardContainer from "./CardContainer";
@@ -8,15 +9,17 @@ import SubHeader from "./SubHeader";
 
 const Home = () => {
   const [products, setProducts] = useState<Array<IProductInfo>>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [originalProducts, setOriginalProducts] =
     useState<Array<IProductInfo>>(products);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchValue, setSearchValue] = useState<string>("");
   const [categoryValue, setCategoryValue] = useState<string>("");
   const [initialized, setInitialized] = useState<boolean>(false);
+  console.log(originalProducts, searchValue, categoryValue);
 
   const getAllTheData = async () => {
     const data = await getAllProducts();
-    console.log({ data }, data.length);
     setProducts(data);
     setOriginalProducts(data);
     data.length > 0 && setInitialized(true);
@@ -48,7 +51,7 @@ const Home = () => {
 
   useEffect(() => {
     getAllTheData();
-  }, [products.length]);
+  }, []);
 
   return (
     <>

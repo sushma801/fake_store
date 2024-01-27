@@ -7,20 +7,23 @@ export const StyledCardContainer = styled.div<StyleProps>`
   display: flex;
   flex-direction: column;
   row-gap: 0.75rem;
-  width: ${({ isEditProduct }: props) => (isEditProduct ? "95%" : "435px")};
+  width: ${({ isEditProduct }: StyleProps) =>
+    isEditProduct ? "auto" : "435px"};
   align-items: center;
   box-shadow: ${(props) =>
     props.isEditProduct ? "" : "5px 5px 10px -5px rgba(0,0,0,0.5)"};
   padding: 0.5rem;
 
   img {
-    width: ${({ isEditProduct }: props) => (isEditProduct ? "550px" : "150px")};
-    height: ${({ isEditProduct }: props) =>
+    width: ${({ isEditProduct }: StyleProps) =>
+      isEditProduct ? "550px" : "150px"};
+    height: ${({ isEditProduct }: StyleProps) =>
       isEditProduct ? "550px" : "150px"};
   }
+
   .description,
   .title {
-    display: ${({ isEditProduct }: props) =>
+    display: ${({ isEditProduct }: StyleProps) =>
       isEditProduct ? "" : "-webkit-box"};
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;

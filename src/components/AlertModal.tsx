@@ -5,7 +5,6 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import React from "react";
 
 interface IDialogProps {
   open: boolean;

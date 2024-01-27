@@ -95,6 +95,7 @@ const ProductForm = () => {
             name="price"
             label="Price"
             placeholder="Enter Price of the product"
+            helperText="Please Enter the price in dollers"
             size="small"
             variant="filled"
             value={formik.touched ? formik.values.price : ""}

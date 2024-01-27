@@ -1,4 +1,3 @@
-import React from "react";
 import { StyledHeader } from "./Header.module";
 
 import { ImHome } from "react-icons/im";
