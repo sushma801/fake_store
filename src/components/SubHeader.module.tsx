@@ -1,27 +1,39 @@
+import { TextField } from "@mui/material";
 import styled from "styled-components";
 
 export const StyledSubHeader = styled.div`
-  background-color: #b143e0;
+  background-color: #c684e3;
   padding: 0.5rem;
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
 
   .search {
-    position: relative;
-    padding: 0.5rem;
-    border-radius: 10px;
-    border: none;
-    width: 25rem;
-  }
-  button {
-    position: absolute;
-    left: 390px;
-    top: 35px;
-    border: none;
+    background-color: white;
+    width: 13rem;
   }
 
-  input:focus,
-  select:focus {
-    outline: none;
+  #select-category-label {
+    color: #0a0a0a;
+  }
+
+  .addNewProduct {
+    border: none;
+    align-items: center;
+    display: flex;
+    padding: 0.5rem;
+    gap: 0.75rem;
+
+    svg {
+      font-size: large;
+    }
   }
 `;
+
+export const CustomeTextFeild = styled(TextField)({
+  "& label.Mui-focused": {
+    color: "#0a0a0a",
+  },
+  "& .MuiFilledInput-root:after": {
+    border: "none",
+  },
+});

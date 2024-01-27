@@ -5,8 +5,9 @@ export interface IProductInfo {
   image: string;
   price: number;
   description: string;
-  rating: IRatings;
-  flag: boolean;
+  rating?: IRatings;
+  isEditProduct?: boolean;
+  handleReload?: () => void;
 }
 
 export interface IRatings {

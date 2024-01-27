@@ -18,7 +18,11 @@ const ProductView = () => {
     getProductbyId(productId);
   }, [productId, initialize]);
   console.log({ productId });
-  return initialize ? <CardContainer {...product} flag /> : <NoProduct />;
+  return initialize ? (
+    <CardContainer {...product} isEditProduct />
+  ) : (
+    <NoProduct />
+  );
 };
 
 export default ProductView;

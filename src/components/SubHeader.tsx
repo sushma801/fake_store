@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import { StyledSubHeader } from "./SubHeader.module";
-import { IDropDown } from "../Modals/Product";
+import { useState } from "react";
+
+import { BiSolidCartAdd } from "react-icons/bi";
+import { CustomeTextFeild, StyledSubHeader } from "./SubHeader.module";
+
+import { useNavigate } from "react-router-dom";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { categories } from "../Modals/Constant";
 
 interface ISubProps {
   onSearch: (value: string) => void;
   onSelectCategory: (value: string) => void;
 }
 
-const categories: IDropDown[] = [
-  { label: `Men`, value: `men's clothing` },
-  { label: `Jewelery`, value: `jewelery` },
-  { label: `Electronics`, value: `electronics` },
-  { label: `Women`, value: `women's clothing` },
-];
-
 const SubHeader = ({ onSearch, onSelectCategory }: ISubProps) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedValue, setSelectedValue] = useState<string>("");
+
+  const navigate = useNavigate();
+
   const handleEnteredValue = (event: Event) => {
     setSearchValue(event.target?.value);
     onSearch(event.target?.value);
@@ -26,26 +26,39 @@ const SubHeader = ({ onSearch, onSelectCategory }: ISubProps) => {
     setSelectedValue(event.target?.value);
     onSelectCategory(event.target?.value);
   };
+
+  const hanldeAddProduct = () => {
+    navigate("/add_product");
+  };
   return (
     <StyledSubHeader>
-      <input
-        type="text"
-        onChange={handleEnteredValue}
-        value={searchValue}
-        placeholder="Search"
+      <CustomeTextFeild
         className="search"
+        label="Search"
+        variant="filled"
+        value={searchValue}
+        onChange={handleEnteredValue}
       />
-      <button>
-        <FaSearch />
-      </button>
 
-      <select className="search" onChange={handleSelecte} value={selectedValue}>
-        {categories.map((category, index) => (
-          <option value={category.value} key={index}>
-            {category.label}
-          </option>
-        ))}
-      </select>
+      <FormControl variant="filled" className="search">
+        <InputLabel id="select-category-label">Category</InputLabel>
+        <Select
+          onChange={handleSelecte}
+          value={selectedValue}
+          labelId="select-category-label"
+          placeholder="Category"
+        >
+          {categories.map((category, index) => (
+            <MenuItem key={index} value={category.value}>
+              {category.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <button className="addNewProduct" onClick={hanldeAddProduct}>
+        Add New Product <BiSolidCartAdd />
+      </button>
     </StyledSubHeader>
   );
 };
