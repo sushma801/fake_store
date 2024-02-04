@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../service/API";
 import { IProductInfo } from "../Modals/Product";
@@ -9,44 +9,42 @@ import SubHeader from "./SubHeader";
 
 const Home = () => {
   const [products, setProducts] = useState<Array<IProductInfo>>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [originalProducts, setOriginalProducts] =
-    useState<Array<IProductInfo>>(products);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [categoryValue, setCategoryValue] = useState<string>("");
+  const [filterProducts, setFilterProducts] = useState<Array<IProductInfo>>([]);
+  const [isFiltered, setIsFiltered] = useState<boolean>(false);
+
   const [initialized, setInitialized] = useState<boolean>(false);
-  console.log(originalProducts, searchValue, categoryValue);
 
   const getAllTheData = async () => {
     const data = await getAllProducts();
     setProducts(data);
-    setOriginalProducts(data);
+
     data.length > 0 && setInitialized(true);
   };
 
   const handleSearch = (value: string) => {
-    setSearchValue(value);
-
-    const newProducts = products.filter((product) =>
-      product.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())
-    );
-    setProducts(newProducts);
-    // if (value !== searchValue) {
-    //   setProducts(originalProducts);
-    // }
+    if (value !== "") {
+      const newProducts = products.filter((product) =>
+        product.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+      );
+      setIsFiltered(true);
+      setFilterProducts(newProducts);
+    } else {
+      setIsFiltered(false);
+      setFilterProducts([]);
+    }
   };
 
   const handleSelectCategory = (value: string) => {
-    setCategoryValue(value);
-
-    const newProducts = products.filter(
-      (product) => product.category === value
-    );
-    setProducts(newProducts);
-    // if (value !== categoryValue) {
-    //   setProducts(originalProducts);
-    // }
+    if (value !== "_") {
+      const newProducts = products.filter(
+        (product) => product.category === value
+      );
+      setIsFiltered(true);
+      setFilterProducts(newProducts);
+    } else {
+      setIsFiltered(false);
+      setFilterProducts([]);
+    }
   };
 
   useEffect(() => {
@@ -61,13 +59,23 @@ const Home = () => {
       />
       <StyledHome>
         {initialized ? (
-          products.map((product, index) => (
-            <CardContainer
-              {...product}
-              key={index}
-              handleReload={() => window.location.reload()}
-            />
-          ))
+          isFiltered ? (
+            filterProducts.map((product, index) => (
+              <CardContainer
+                {...product}
+                key={index}
+                handleReload={() => window.location.reload()}
+              />
+            ))
+          ) : (
+            products.map((product, index) => (
+              <CardContainer
+                {...product}
+                key={index}
+                handleReload={() => window.location.reload()}
+              />
+            ))
+          )
         ) : (
           <NoProduct />
         )}

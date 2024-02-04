@@ -71,7 +71,9 @@ const CardContainer = ({
             {description}
           </p>
           <div className="ratings">
-            <span>Price: Rs.{Math.floor(price * 83.33)}</span>
+            <span>
+              Price: Rs.{Math.floor(price * 83.33)}/ {price}$
+            </span>
             <span>Rate:{rating?.rate}</span>
           </div>
           <div className="actions">
